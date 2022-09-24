@@ -1,31 +1,44 @@
-
 public class Polynomial {
 	double arr [];
 	
 	public Polynomial() {
-		arr[0] = 0;
+		arr = new double[1];
+		this.arr[0] = 0;
 	}
 	
 	public Polynomial(double []a) {
+		arr = new double[a.length];
 		for(int i=0;i<a.length;i++) {
-			arr[i] = a[i];
+			this.arr[i] = a[i];
 		}
 	}
 	
 	public Polynomial add(Polynomial other) {
-		
-		for(int i=0;i<other.arr.length;i++) {
-			other.arr[i] = other.arr[i] + arr[i];
+		int len = Math.min(this.arr.length, other.arr.length);
+		int len2 = Math.max(this.arr.length, other.arr.length);
+		double []naya = new double[len2];
+		Polynomial temp = new Polynomial(naya);
+		for(int i=0;i<len;i++) {
+			temp.arr[i] = other.arr[i] + this.arr[i];
 		}
-		return other;
+		if(other.arr.length > this.arr.length) {
+			for(int i=len;i < len2;i++) {
+				temp.arr[i] = temp.arr[i] + other.arr[i];
+			}
+		}
+		else if (other.arr.length < this.arr.length) {
+			for(int i=len;i < len2;i++) {
+				temp.arr[i] = temp.arr[i] + this.arr[i];
+			}
+		}
+
+		return temp;
 	}
 	
 	public double evaluate(double a) {
-		double temp = 0;
 		double ret = 0;
-		for(int i=0;i<arr.length;i++) {
-			ret = arr[i]*Math.pow(a, temp);
-			temp++;
+		for(int i=0;i<this.arr.length;i++) {
+			ret = this.arr[i]*Math.pow(a, i) + ret;	
 		}	
 		return ret;
 	}
