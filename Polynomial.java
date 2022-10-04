@@ -25,54 +25,26 @@ public class Polynomial {
 		}
 	}
 	
-	public Polynomial(File file) throws FileNotFoundException {
-		
+	public Polynomial(File file) throws FileNotFoundException {	
 		Scanner line = new Scanner(file);
 		String ok = line.nextLine();
-		int len = 1;
-		for(int i = 0; i < ok.length(); i++) {//gets the number of terms of the polynomial
-			if(ok.charAt(i) == '-' || ok.charAt(i) == '+') 
-				len++;
+		String [] spli = ok.split("(?=-)|\\+");
+		coeff = new double[spli.length];
+		expo = new int[spli.length];
+		for(int i = 0; i < spli.length; i++) {
+			int ind = spli[i].indexOf("x");
+			if(ind == 0) {
+				coeff[i] = 1;
+			}
+			else if(ind == -1) {
+				coeff[i] = Double.parseDouble(spli[i].substring(0, spli[i].length()));
+			}
+			else {
+				coeff[i] = Double.parseDouble(spli[i].substring(0, ind));
+			}
+			expo[i] = Integer.parseInt(spli[i].substring(ind+1, spli[i].length()));
 		}
-		coeff = new double[len];
-		expo = new int[len];
-		
-		int temp1 = 0;
-		int temp2 = 0;
-		for(int i = 0; i < ok.length(); i++) {
-			//check the first character
-			while(i+1 < ok.length() && (ok.charAt(i+1) != '+' || ok.charAt(i+1) != '-' || ok.charAt(i) != 'x')) {
-				String no = "";
-				if(ok.charAt(0) == '-') {
-					no = no + "-";
-				}
-				for(int j = i+1; j != 'x'; j++) {
-					no = no + ok.charAt(j);
-				}
-				coeff[temp1] = Double.parseDouble(no);
-				temp1++;
-			}
-			if(ok.charAt(i) == '+' || ok.charAt(i) == '-') {//seperate the terms
-				String tem = "";
-				if(ok.charAt(i) == '-') {
-					tem = tem + "-";
-				}
-				for(int j = i+1; j != 'x'; j++) {//get the coeff
-					tem = tem + ok.charAt(j);
-				}
-				coeff[temp1] = Double.parseDouble(tem);
-				temp1++;
-			}
-			if(ok.charAt(i) == 'x') {//get the exponents
-				String tem = "";
-				for(int j = i+1; j != '+' || j != '-' || j != ok.length(); j++) {
-					tem = tem + ok.charAt(j);
-				}
-				expo[temp2] = Integer.parseInt(tem);
-				temp2++;
-			}
-		}
-		line.close();
+		line.close();		
 	}
 	
 	public void saveToFile(String filename) throws FileNotFoundException {
@@ -89,8 +61,6 @@ public class Polynomial {
 				string = string + '+';//add the plus sign if positive
 			}
 		}
-		System.out.println(string);
-		
 		PrintStream aight = new PrintStream(filename);
 		aight.println(string);
 		aight.close();

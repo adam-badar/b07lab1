@@ -26,15 +26,16 @@ public class Driver {
      int e4[] = {0,1,8,2,3,2};
      Polynomial n = new Polynomial(c4,e4);
      Polynomial k = p3.multiply(p2);
-//     File file = new File("C:\\Users\\badar\\OneDrive\\Desktop\\Java\\geometry\\random.txt");
-//     Polynomial f = new Polynomial(file);
-//     System.out.println("*******************");
+     
+     File file = new File("C:\\Users\\badar\\b07lab1\\death.txt");
+     Polynomial f = new Polynomial(file);
+     System.out.println("*******************");
 //     for(int i=0; i<f.coeff.length;i++)
 //     {
-//         System.out.println(f.coeff[i]+"\t"+f.expo[i]);
-//         //System.out.println(f.ex[i]);
+//         System.out.println(f.coeff[i] + ", " + f.expo[i]);
+//         
 //     }
-//     f.saveToFile("do.txt");
+     f.saveToFile("do.txt");
   
      n.saveToFile("test.txt");
 	 } 
