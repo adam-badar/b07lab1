@@ -30,11 +30,11 @@ public class Driver {
      File file = new File("C:\\Users\\badar\\b07lab1\\death.txt");
      Polynomial f = new Polynomial(file);
      System.out.println("*******************");
-//     for(int i=0; i<f.coeff.length;i++)
-//     {
-//         System.out.println(f.coeff[i] + ", " + f.expo[i]);
-//         
-//     }
+     for(int i=0; i<f.coeff.length;i++)
+     {
+         System.out.println(f.coeff[i] + ", " + f.expo[i]);
+         
+     }
      f.saveToFile("do.txt");
   
      n.saveToFile("test.txt");

@@ -42,7 +42,12 @@ public class Polynomial {
 			else {
 				coeff[i] = Double.parseDouble(spli[i].substring(0, ind));
 			}
-			expo[i] = Integer.parseInt(spli[i].substring(ind+1, spli[i].length()));
+			if(ind+1 == spli[i].length()) {
+				expo[i] = 1;
+			}
+			else {
+				expo[i] = Integer.parseInt(spli[i].substring(ind+1, spli[i].length()));
+			}
 		}
 		line.close();		
 	}
